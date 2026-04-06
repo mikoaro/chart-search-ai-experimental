@@ -1,0 +1,126 @@
+@use '@carbon/styles/scss/spacing' as *;
+
+.medical-bot-container {
+  position: fixed;
+  bottom: $spacing-05;
+  right: $spacing-05;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $spacing-04;
+}
+
+.fab-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #1a3a3a;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.38, 0.9), background-color 0.2s;
+
+  &:hover {
+    background-color: #1a3a3a;
+    transform: scale(1.05);
+  }
+
+  &.active {
+    background-color: #393939;
+  }
+}
+
+.chat-window {
+  width: 320px;
+  height: 400px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+
+  .chat-header {
+    background: #161616;
+    color: white;
+    padding: $spacing-03 $spacing-04;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+
+    .close-chat {
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: $spacing-04;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-03;
+    background-color: #f4f4f4;
+
+    .message {
+      padding: $spacing-02 $spacing-03;
+      border-radius: 4px;
+      font-size: 13px;
+      max-width: 85%;
+      line-height: 1.4;
+
+      &.user {
+        align-self: flex-end;
+        background-color: #0f62fe;
+        color: white;
+      }
+
+      &.bot {
+        align-self: flex-start;
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        color: #161616;
+      }
+    }
+  }
+
+  .chat-input-area {
+    padding: $spacing-03;
+    display: flex;
+    gap: $spacing-02;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+
+    input {
+      flex: 1;
+      border: 1px solid #d0d0d0;
+      padding: $spacing-02;
+      font-size: 13px;
+      border-radius: 4px;
+
+      &:focus {
+        outline: 2px solid #0f62fe;
+      }
+    }
+
+    .send-btn {
+      background: transparent;
+      border: none;
+      color: #0f62fe;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

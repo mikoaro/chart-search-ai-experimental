@@ -1,0 +1,56 @@
+// Carbon Design tokens
+$spacing-01: 2px;
+$spacing-02: 4px;
+$spacing-03: 8px;
+$spacing-04: 16px;
+$spacing-05: 24px;
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  padding-bottom: $spacing-05;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-04;
+  padding: $spacing-04;
+  margin: 0 $spacing-04;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 768px) {
+    padding: $spacing-03;
+    margin: 0 $spacing-03;
+  }
+}
+
+
+
+  .sidebar {
+    order: 1;
+  }
+
+  .main-content {
+    order: 2;
+  }
+
