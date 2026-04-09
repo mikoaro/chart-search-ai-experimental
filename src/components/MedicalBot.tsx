@@ -1,34 +1,54 @@
-import React, { useState } from "react";
-import { ChatBot, SendAlt, Close } from "@carbon/icons-react";
+import React, { useState, useEffect, useRef } from "react";
+import { ChatBot, SendAlt, Close, User, Bot } from "@carbon/icons-react";
 import "./MedicalBot.scss";
 
 export const MedicalBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([
-    { role: "bot", text: "Hello! How can I assist with patient data today?" },
+    { 
+    role: "bot", 
+    text: "Hello! How can I assist with patient data today?", 
+    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+  },
   ]);
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
+  // Reference to the bottom of the chat
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const userMessage = { role: "user", text: inputValue };
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-
-    // Simple Logic: Simulate the specific bot response
-    setTimeout(() => {
-      let botResponse =
-        "I'm sorry, I can only provide specific vitals like Oxygen Saturation right now.";
-
-      if (inputValue.toLowerCase().includes("oxygen saturation")) {
-        botResponse = "Oxygen saturation at 95%.";
-      }
-
-      setMessages((prev) => [...prev, { role: "bot", text: botResponse }]);
-    }, 600);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Automatically scroll whenever messages array updates
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [messages, isOpen]);
+
+  const handleSend = () => {
+  if (!inputValue.trim()) return;
+  
+  const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  
+  const userMessage = { role: "user", text: inputValue, timestamp: now };
+  setMessages((prev) => [...prev, userMessage]);
+  setInputValue("");
+
+  setTimeout(() => {
+    let botResponse = "I'm sorry, I can only provide specific vitals like Oxygen Saturation right now.";
+    if (inputValue.toLowerCase().includes("oxygen saturation")) {
+      botResponse = "Oxygen saturation at 95%.";
+    }
+    
+    setMessages((prev) => [...prev, { 
+      role: "bot", 
+      text: botResponse, 
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+    }]);
+  }, 600);
+};
   return (
     <div className="medical-bot-container">
       {isOpen && (
@@ -39,20 +59,39 @@ export const MedicalBot: React.FC = () => {
               <Close size={16} />
             </button>
           </div>
+          
           <div className="chat-body">
             {messages.map((msg, i) => (
-              <div key={i} className={`message ${msg.role}`}>
-                {msg.text}
-              </div>
+             <div key={i} className={`message-group ${msg.role}`}>
+      {/* Label above the message */}
+      <span className="sender-label">
+        {msg.role === "bot" ? "MediBot" : "You"}
+         <span className="timestamp">{msg.timestamp}</span>
+      </span>
+     
+      
+      <div className={`message-row ${msg.role}`}>
+        <div className="chat-avatar">
+          {msg.role === "bot" ? <Bot size={16} /> : <User size={16} />}
+        </div>
+        <div className="message-text">
+          {msg.text}
+        </div>
+      </div>
+      {/* <span className="timestamp">{msg.timestamp}</span> */}
+    </div>
             ))}
+            {/* Anchor for scrolling */}
+            <div ref={messagesEndRef} />
           </div>
+
           <div className="chat-input-area">
             <input
               type="text"
               placeholder="Ask about vitals..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSend()}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
             />
             <button onClick={handleSend} className="send-btn">
               <SendAlt size={20} />

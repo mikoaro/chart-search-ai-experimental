@@ -3,13 +3,12 @@
 .medical-bot-container {
   position: fixed;
   bottom: $spacing-05;
-  right: $spacing-05;
+  right: $spacing-08;
   z-index: 999;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: $spacing-04;
-  margin-right: 30px;
 }
 
 .fab-button {
@@ -23,40 +22,33 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition:
-    transform 0.2s cubic-bezier(0.2, 0, 0.38, 0.9),
-    background-color 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
 
   &:hover {
-    background-color: #1a3a3a;
     transform: scale(1.05);
-  }
-
-  &.active {
-    background-color: #1a3a3a;
+    background-color: (#1a3a3a, 5%);
   }
 }
 
 .chat-window {
-  width: 320px;
-  height: 400px;
+  width: 340px;
+  height: 450px;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 
   .chat-header {
     background: #1a3a3a;
     color: white;
-    padding: $spacing-03 $spacing-04;
+    padding: $spacing-04;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px;
     font-weight: 600;
 
     .close-chat {
@@ -64,56 +56,115 @@
       border: none;
       color: white;
       cursor: pointer;
+      display: flex;
     }
   }
 
   .chat-body {
-    flex: 1;
-    padding: $spacing-04;
-    overflow-y: auto;
+  flex: 1;
+  padding: $spacing-05;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-06; // Increased gap between different message groups
+  background-color: #f4f4f4;
+
+  .message-group {
     display: flex;
     flex-direction: column;
+    width: 100%;
+
+    &.bot {
+      align-items: flex-start;
+      .sender-label { margin-left: 40px; } // Align with the start of the bubble
+    }
+
+    &.user {
+      align-items: flex-end;
+      .sender-label { margin-right: 40px; } // Align with the start of the bubble
+    }
+  }
+
+  .sender-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #6f6f6f;
+    margin-bottom: $spacing-02;
+    display: flex;
+    gap: 5px;
+}
+
+ .timestamp {
+  font-size: 11px;
+  color: #080000; // Lighter than the label
+  font-weight: 100;
+  }
+
+  
+
+  .message-row {
+    display: flex;
     gap: $spacing-03;
-    background-color: #f4f4f4;
+    max-width: 85%;
+    align-items: flex-start;
 
-    .message {
-      padding: $spacing-02 $spacing-03;
-      border-radius: 4px;
-      font-size: 13px;
-      max-width: 85%;
-      line-height: 1.4;
+    &.bot {
+      flex-direction: row;
+      .chat-avatar { background: #1a3a3a; }
+    }
 
-      &.user {
-        align-self: flex-end;
+    &.user {
+      flex-direction: row-reverse;
+      .message-text {
         background-color: #1a3a3a;
         color: white;
       }
-
-      &.bot {
-        align-self: flex-start;
-        background-color: white;
-        border: 1px solid #e0e0e0;
+      .chat-avatar {
+        background: #e0e0e0;
         color: #161616;
       }
     }
   }
 
-  .chat-input-area {
-    padding: $spacing-03;
+  .chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     display: flex;
-    gap: $spacing-02;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+  }
+
+  .message-text {
+    padding: $spacing-03 $spacing-04;
+    background-color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+  .chat-input-area {
+    padding: $spacing-04;
+    display: flex;
+    gap: $spacing-03;
     background: white;
     border-top: 1px solid #e0e0e0;
 
     input {
       flex: 1;
       border: 1px solid #d0d0d0;
-      padding: $spacing-02;
-      font-size: 13px;
+      padding: $spacing-03;
+      font-size: 14px;
       border-radius: 4px;
 
       &:focus {
         outline: 2px solid #1a3a3a;
+        border-color: transparent;
       }
     }
 
@@ -124,6 +175,11 @@
       cursor: pointer;
       display: flex;
       align-items: center;
+      padding: 0;
+      
+      &:hover {
+        color: (#1a3a3a, 10%);
+      }
     }
   }
 }

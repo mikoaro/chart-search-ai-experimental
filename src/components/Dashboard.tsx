@@ -12,6 +12,7 @@ import { RightSidebar } from "./RightSidebar";
 
 export const Dashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(true);
 
   // This component represents the "Home" view (Patient Summary)
   const PatientSummaryView = () => (
@@ -27,7 +28,11 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard">
-      <Header onSearch={setSearchQuery} />
+      <Header 
+        onSearch={setSearchQuery} 
+        isRightSidebarOpen={isRightSidebarOpen}
+        onToggleRightSidebar={() => setIsRightSidebarOpen(!isRightSidebarOpen)}
+      />
 
       <div className="dashboard-content">
         <Sidebar />
@@ -52,7 +57,7 @@ export const Dashboard: React.FC = () => {
             />
           </Routes>
         </main>
-        <RightSidebar />
+        {isRightSidebarOpen && <RightSidebar />}
       </div>
       <MedicalBot />
     </div>
