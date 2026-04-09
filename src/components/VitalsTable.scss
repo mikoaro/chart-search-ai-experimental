@@ -1,6 +1,6 @@
-@use '@carbon/styles/scss/colors' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type' as *;
+@use "@carbon/styles/scss/colors" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
 
 .section {
   margin: $spacing-04;
@@ -32,7 +32,7 @@
   color: #161616;
   position: relative;
   padding-bottom: $spacing-02;
-  border-bottom: 3px solid #0f62fe;
+  border-bottom: 5px solid #1d8989;
   display: inline-block;
 }
 
@@ -43,29 +43,6 @@
   font-size: 12px;
   color: #525252;
   flex-wrap: wrap;
-}
-
-.meta-text {
-  color: #525252;
-}
-
-.meta-badge {
-  background-color: #fee5e5;
-  color: #da1e28;
-  padding: $spacing-01 $spacing-02;
-  border-radius: 2px;
-  font-weight: 500;
-}
-
-.meta-link {
-  color: #0043ce;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .section-actions {
@@ -93,9 +70,29 @@
   }
 }
 
-.action-btn {
+.icon-btn-data {
   background: transparent;
   border: 1px solid #0f62fe;
+  color: #0f62fe;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f4f4f4;
+    border-color: #a8a8a8;
+  }
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
   color: #0f62fe;
   padding: $spacing-02 $spacing-03;
   border-radius: 4px;
@@ -103,6 +100,7 @@
   font-size: 13px;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
+  margin-left: 40px;
 
   &:hover {
     background-color: #0f62fe;
@@ -255,7 +253,8 @@
   .data-table {
     font-size: 12px;
 
-    th, td {
+    th,
+    td {
       padding: $spacing-02;
     }
   }

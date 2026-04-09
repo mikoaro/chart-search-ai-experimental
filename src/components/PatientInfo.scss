@@ -1,6 +1,6 @@
-@use '@carbon/styles/scss/colors' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type' as *;
+@use "@carbon/styles/scss/colors" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/type" as *;
 
 .patient-info-container {
   padding: $spacing-05;
@@ -19,8 +19,8 @@
   width: 60px;
   height: 60px;
   min-width: 60px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, #6b46c1 0%, #7c3aed 100%);
+  // border-radius: 4px;
+  background: linear-gradient(135deg, #634b9c 0%, #7c3aed 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -51,8 +51,8 @@
 .patient-meta {
   display: flex;
   align-items: center;
-  gap: $spacing-02;
-  font-size: 14px;
+  gap: $spacing-03;
+  font-size: 16px;
   color: #525252;
   margin-top: $spacing-02;
   flex-wrap: wrap;
@@ -60,12 +60,20 @@
 
 .patient-separator {
   color: #a8a8a8;
+  font-size: 20px;
 }
 
 .patient-date,
 .patient-id,
 .patient-age {
   color: #525252;
+}
+
+.patient-id {
+  background: #e0dedede;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 40px;
 }
 
 .patient-status {
@@ -83,6 +91,56 @@
   &.active-visit {
     background-color: #d5e6f5;
     color: #0043ce;
+    margin-left: 15px;
+  }
+}
+
+.profile-header {
+  margin: 0 0 $spacing-02 0;  
+  color: #161616;
+  position: relative;
+  padding-bottom: $spacing-02;
+  padding-top: $spacing-05;
+  display: flex;
+  gap: $spacing-05;
+  border-top: #1a1a1a23 1px solid;
+}
+
+.profile-title {
+  margin: 0 0 $spacing-02 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #161616;
+  position: relative;
+  padding-bottom: $spacing-02;
+  display: inline-block;
+}
+
+.meta-text {
+  color: #525252;
+}
+
+.meta-badge {
+  background-color: #fee5e5;
+  color: #da1e28;
+  padding: $spacing-01 $spacing-04;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.arrow-icon {
+  margin-left: 5px;
+  margin-top: 4px;
+}
+
+.meta-link {
+  color: #0043ce;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -91,8 +149,9 @@
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: $spacing-03;
   margin-bottom: $spacing-05;
-  padding: $spacing-04;
-  background-color: #f4f4f4;
+  padding: $spacing-02;
+  padding-top: $spacing-05;
+  // background-color: #f4f4f4;
   border-radius: 4px;
 }
 
@@ -102,11 +161,21 @@
   gap: $spacing-01;
 }
 
+.vital-card-heart {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-01;
+  border: #9f440828 2px solid;
+  background-color: #ea8a1d23;
+  padding: 5px;
+  width: 110px;
+}
+
 .vital-label {
   font-size: 12px;
   font-weight: 600;
   color: #525252;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 

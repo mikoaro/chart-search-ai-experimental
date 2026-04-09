@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import { ChatBot, SendAlt, Close } from '@carbon/icons-react';
-import './MedicalBot.scss';
+import React, { useState } from "react";
+import { ChatBot, SendAlt, Close } from "@carbon/icons-react";
+import "./MedicalBot.scss";
 
 export const MedicalBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([
-    { role: 'bot', text: 'Hello! How can I assist with patient data today?' }
+    { role: "bot", text: "Hello! How can I assist with patient data today?" },
   ]);
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
 
-    const userMessage = { role: 'user', text: inputValue };
+    const userMessage = { role: "user", text: inputValue };
     setMessages((prev) => [...prev, userMessage]);
-    setInputValue('');
+    setInputValue("");
 
     // Simple Logic: Simulate the specific bot response
     setTimeout(() => {
-      let botResponse = "I'm sorry, I can only provide specific vitals like Oxygen Saturation right now.";
-      
-      if (inputValue.toLowerCase().includes('oxygen saturation')) {
+      let botResponse =
+        "I'm sorry, I can only provide specific vitals like Oxygen Saturation right now.";
+
+      if (inputValue.toLowerCase().includes("oxygen saturation")) {
         botResponse = "Oxygen saturation at 95%.";
       }
 
-      setMessages((prev) => [...prev, { role: 'bot', text: botResponse }]);
+      setMessages((prev) => [...prev, { role: "bot", text: botResponse }]);
     }, 600);
   };
 
@@ -46,12 +47,12 @@ export const MedicalBot: React.FC = () => {
             ))}
           </div>
           <div className="chat-input-area">
-            <input 
-              type="text" 
-              placeholder="Ask about vitals..." 
+            <input
+              type="text"
+              placeholder="Ask about vitals..."
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+              onKeyPress={(e) => e.key === "Enter" && handleSend()}
             />
             <button onClick={handleSend} className="send-btn">
               <SendAlt size={20} />
@@ -60,8 +61,8 @@ export const MedicalBot: React.FC = () => {
         </div>
       )}
 
-      <button 
-        className={`fab-button ${isOpen ? 'active' : ''}`} 
+      <button
+        className={`fab-button ${isOpen ? "active" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
         title="Open Medical Bot"
       >

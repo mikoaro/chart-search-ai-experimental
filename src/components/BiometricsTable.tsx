@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
-import { biometricsData } from '../lib/mockPatientData';
-import './BiometricsTable.scss';
+import React, { useState } from "react";
+import { biometricsData } from "../lib/mockPatientData";
+import "./BiometricsTable.scss";
+import { Analytics, Db2Database } from "@carbon/icons-react";
 
 interface BiometricsProps {
   searchQuery: string;
 }
 
 export const BiometricsTable: React.FC<BiometricsProps> = ({ searchQuery }) => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   // 1. Filter the data first
-  const filteredData = biometricsData.filter((item) => 
-    item.dateTime.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.weight.toString().includes(searchQuery) ||
-    item.height.toString().includes(searchQuery)
+  const filteredData = biometricsData.filter(
+    (item) =>
+      item.dateTime.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.weight.toString().includes(searchQuery) ||
+      item.height.toString().includes(searchQuery),
   );
 
   // 2. Base pagination on the FILTERED data
@@ -35,9 +36,9 @@ export const BiometricsTable: React.FC<BiometricsProps> = ({ searchQuery }) => {
           <h2 className="section-title">Biometrics</h2>
         </div>
         <div className="section-actions">
-          <button className="icon-btn">📊</button>
-          <button className="icon-btn">⇄</button>
-          <button className="action-btn">+ Add</button>
+          <button className="icon-btn-data"><Db2Database /></button>
+          <button className="icon-btn"><Analytics /></button>
+          <button className="action-btn">Add +</button>
         </div>
       </div>
 
@@ -64,7 +65,14 @@ export const BiometricsTable: React.FC<BiometricsProps> = ({ searchQuery }) => {
                 </tr>
               ))
             ) : (
-              <tr><td colSpan={5} style={{textAlign: 'center', padding: '20px'}}>No results found</td></tr>
+              <tr>
+                <td
+                  colSpan={5}
+                  style={{ textAlign: "center", padding: "20px" }}
+                >
+                  No results found
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -72,20 +80,26 @@ export const BiometricsTable: React.FC<BiometricsProps> = ({ searchQuery }) => {
 
       <div className="table-footer">
         <div className="footer-info">
-          <span>{startIdx + 1} / {biometricsData.length} items</span>
+          <span>
+            {startIdx + 1} / {biometricsData.length} items
+          </span>
         </div>
         <div className="pagination">
-          <button 
+          <button
             className="pagination-btn"
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
           >
             ←
           </button>
-          <span className="pagination-info">{currentPage} of {totalPages} pages</span>
-          <button 
+          <span className="pagination-info">
+            {currentPage} of {totalPages} pages
+          </span>
+          <button
             className="pagination-btn"
-            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
             disabled={currentPage === totalPages}
           >
             →

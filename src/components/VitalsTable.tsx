@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { vitalsData } from '../lib/mockPatientData';
-import './VitalsTable.scss';
+import React, { useEffect, useState } from "react";
+import { vitalsData } from "../lib/mockPatientData";
+import "./VitalsTable.scss";
+import { Analytics, Db2Database } from "@carbon/icons-react";
 
 interface VitalsTableProps {
   searchQuery: string;
@@ -32,16 +33,11 @@ export const VitalsTable: React.FC<VitalsTableProps> = ({ searchQuery }) => {
       <div className="section-header">
         <div className="section-title-group">
           <h2 className="section-title">Vitals</h2>
-          <div className="section-meta">
-            <span className="meta-text">02-Feb-2025, 12:45 PM</span>
-            <span className="meta-badge">These vitals are 5 days old</span>
-            <a href="#" className="meta-link">Vitals history</a>
-          </div>
         </div>
         <div className="section-actions">
-          <button className="icon-btn">📊</button>
-          <button className="icon-btn">⇄</button>
-          <button className="action-btn">+ Add</button>
+          <button className="icon-btn-data"><Db2Database /></button>
+          <button className="icon-btn"><Analytics /></button>
+          <button className="action-btn">Add +</button>
         </div>
       </div>
 
@@ -60,22 +56,42 @@ export const VitalsTable: React.FC<VitalsTableProps> = ({ searchQuery }) => {
           <tbody>
             {displayedData.length > 0 ? (
               displayedData.map((vital, index) => (
-                <tr key={vital.id} className={index === 0 && searchQuery === '' ? 'row-highlight' : ''}>
+                <tr
+                  key={vital.id}
+                  className={
+                    index === 0 && searchQuery === "" ? "row-highlight" : ""
+                  }
+                >
                   <td className="date-cell">{vital.dateTime}</td>
                   <td>{vital.temp}</td>
                   <td>{vital.bp}</td>
-                  <td className={typeof vital.pulse === 'number' ? '' : 'trend-down'}>
+                  <td
+                    className={
+                      typeof vital.pulse === "number" ? "" : "trend-down"
+                    }
+                  >
                     {vital.pulse}
                   </td>
                   <td>{vital.respiratoryRate}</td>
-                  <td className={typeof vital.spO2 === 'number' ? '' : 'trend-down'}>
+                  <td
+                    className={
+                      typeof vital.spO2 === "number" ? "" : "trend-down"
+                    }
+                  >
                     {vital.spO2}
                   </td>
                 </tr>
               ))
             ) : (
-             <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '2rem', color: '#525252' }}>
+              <tr>
+                <td
+                  colSpan={6}
+                  style={{
+                    textAlign: "center",
+                    padding: "2rem",
+                    color: "#525252",
+                  }}
+                >
                   No vitals found matching "{searchQuery}"
                 </td>
               </tr>
@@ -84,33 +100,41 @@ export const VitalsTable: React.FC<VitalsTableProps> = ({ searchQuery }) => {
         </table>
       </div>
 
-{filteredData.length > 0 && (
-      <div className="table-footer">
-        <div className="footer-info">
-          <span>
-              {startIdx + 1} - {Math.min(startIdx + itemsPerPage, filteredData.length)} of {filteredData.length} items
+      {filteredData.length > 0 && (
+        <div className="table-footer">
+          <div className="footer-info">
+            <span>
+              {startIdx + 1} -{" "}
+              {Math.min(startIdx + itemsPerPage, filteredData.length)} of{" "}
+              {filteredData.length} items
             </span>
-          <a href="#" className="see-all-link">See all</a>
+            <a href="#" className="see-all-link">
+              See all
+            </a>
+          </div>
+          <div className="pagination">
+            <button
+              className="pagination-btn"
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+            >
+              ←
+            </button>
+            <span className="pagination-info">
+              {currentPage} of {totalPages || 1} pages
+            </span>
+            <button
+              className="pagination-btn"
+              onClick={() =>
+                setCurrentPage(Math.min(totalPages, currentPage + 1))
+              }
+              disabled={currentPage === totalPages || totalPages === 0}
+            >
+              →
+            </button>
+          </div>
         </div>
-        <div className="pagination">
-          <button 
-            className="pagination-btn"
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-          >
-            ←
-          </button>
-          <span className="pagination-info">{currentPage} of {totalPages || 1} pages</span>
-          <button 
-            className="pagination-btn"
-            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-            disabled={currentPage === totalPages || totalPages === 0}
-          >
-            →
-          </button>
-        </div>
-      </div>
-)}
+      )}
     </div>
   );
 };

@@ -26,18 +26,17 @@ $sidebar-border: #e0e0e0;
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  padding: $spacing-05;
+  padding-top: $spacing-04;
   gap: $spacing-02;
 }
 
 .sidebar-item {
   display: flex;
-  align-items:start;
-  gap: $spacing-03;
+  align-items: start;
+  gap: $spacing-05;
   padding: $spacing-03 $spacing-04;
   background: transparent;
   border: none;
-  border-radius: 4px;
   color: $sidebar-text;
   cursor: pointer;
   font-size: 14px;
@@ -47,8 +46,10 @@ $sidebar-border: #e0e0e0;
   white-space: nowrap;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:hover, &.active {
     background-color: $sidebar-hover;
+    border-left: #1a3a3a 5px solid;
+    font-weight: 620;
   }
 
   &:active {
@@ -63,7 +64,7 @@ $sidebar-border: #e0e0e0;
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  
+
   // This ensures the SVG inherits the color of the text
   svg {
     fill: currentColor;

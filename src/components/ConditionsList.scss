@@ -1,9 +1,9 @@
-@use '@carbon/styles/scss/colors' as *;
-@use '@carbon/styles/scss/spacing' as *;
+@use "@carbon/styles/scss/colors" as *;
+@use "@carbon/styles/scss/spacing" as *;
 
 .conditions-section {
   .section-title {
-    border-bottom-color: #da291c;
+    border-bottom: 5px solid #1d8989;
   }
 
   .section-meta {
@@ -11,6 +11,11 @@
     align-items: center;
     gap: $spacing-02;
     font-size: 13px;
+  }
+
+  .section-actions {
+    display: flex;
+    gap: $spacing-10;
   }
 
   .meta-label {

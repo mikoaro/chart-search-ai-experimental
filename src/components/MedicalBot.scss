@@ -1,4 +1,4 @@
-@use '@carbon/styles/scss/spacing' as *;
+@use "@carbon/styles/scss/spacing" as *;
 
 .medical-bot-container {
   position: fixed;
@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: $spacing-04;
+  margin-right: 30px;
 }
 
 .fab-button {
@@ -23,7 +24,9 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s cubic-bezier(0.2, 0, 0.38, 0.9), background-color 0.2s;
+  transition:
+    transform 0.2s cubic-bezier(0.2, 0, 0.38, 0.9),
+    background-color 0.2s;
 
   &:hover {
     background-color: #1a3a3a;
@@ -31,7 +34,7 @@
   }
 
   &.active {
-    background-color: #393939;
+    background-color: #1a3a3a;
   }
 }
 
@@ -47,7 +50,7 @@
   overflow: hidden;
 
   .chat-header {
-    background: #161616;
+    background: #1a3a3a;
     color: white;
     padding: $spacing-03 $spacing-04;
     display: flex;
@@ -82,7 +85,7 @@
 
       &.user {
         align-self: flex-end;
-        background-color: #0f62fe;
+        background-color: #1a3a3a;
         color: white;
       }
 
@@ -110,14 +113,14 @@
       border-radius: 4px;
 
       &:focus {
-        outline: 2px solid #0f62fe;
+        outline: 2px solid #1a3a3a;
       }
     }
 
     .send-btn {
       background: transparent;
       border: none;
-      color: #0f62fe;
+      color: #1a3a3a;
       cursor: pointer;
       display: flex;
       align-items: center;

@@ -1,21 +1,25 @@
-import React from 'react';
-import { conditionsData } from '../lib/mockPatientData';
-import './ConditionsList.scss';
+import React from "react";
+import { conditionsData } from "../lib/mockPatientData";
+import "./ConditionsList.scss";
 
 interface ConditionsProps {
   searchQuery: string;
 }
 
 export const ConditionsList: React.FC<ConditionsProps> = ({ searchQuery }) => {
-  const filteredConditions = conditionsData.filter((item) =>
-    item.condition.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.status.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredConditions = conditionsData.filter(
+    (item) =>
+      item.condition.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.status.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-  return (  
+  return (
     <div className="section conditions-section">
       <div className="section-header">
         <div className="section-title-group">
           <h2 className="section-title">Conditions</h2>
+          
+        </div>
+        <div className="section-actions">
           <div className="section-meta">
             <span className="meta-label">Show:</span>
             <select className="meta-select">
@@ -24,9 +28,7 @@ export const ConditionsList: React.FC<ConditionsProps> = ({ searchQuery }) => {
               <option>All</option>
             </select>
           </div>
-        </div>
-        <div className="section-actions">
-          <button className="action-btn">+ Add</button>
+          <button className="action-btn">Add +</button>
         </div>
       </div>
 
@@ -44,7 +46,9 @@ export const ConditionsList: React.FC<ConditionsProps> = ({ searchQuery }) => {
             <div className="col status">
               <span className="status-badge">{condition.status}</span>
             </div>
-            <button className="condition-menu" title="Options">⋮</button>
+            <button className="condition-menu" title="Options">
+              ⋮
+            </button>
           </div>
         ))}
       </div>
